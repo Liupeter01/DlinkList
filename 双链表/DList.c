@@ -110,7 +110,6 @@ void DListInsertBackByPos(DList* SL, int pos, ElemType e)	  //双链表按照位序尾插
 							  p->next = s;		  //p的后继为s
 							  s->prior = p;		  //s的前驱为p
 							  SL->last = s;		  //新插入的结点为最后一个结点
-							  SL->amount++;
 					}
 					else
 					{
@@ -118,8 +117,8 @@ void DListInsertBackByPos(DList* SL, int pos, ElemType e)	  //双链表按照位序尾插
 							  s->prior = p;
 							  s->next = p->next;  //原先p的后继现在为s的后继
 							  p->next = s;					//p当前的后继为s						  
-							  SL->amount++;
 					}
+					SL->amount++;
 					return;
 		  }
 		  else
