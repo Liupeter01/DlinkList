@@ -30,7 +30,7 @@ LinkNode* LocateElemByNum(DList* SL, ElemType key);//查找元素
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void InitDlist(DList* SL);			//初始化
-void  DListSort(DList* SL, LinkNode* left, LinkNode* right);			//排序
+void  DListSort(LinkNode* left, LinkNode* right);			//排序
 void DListDistroy(DList* SL);					  //链表的摧毁
 void DListClear(DList* SL);			//链表的清空
 void DListReverse(DList* SL);			//链表的反转

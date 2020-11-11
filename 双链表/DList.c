@@ -163,9 +163,18 @@ void DListPopBack(DList* SL)		//双链表的尾部删除
 		  else
 		  {
 					LinkNode* pre = SL->last->prior;		//保存最后结点的前驱
-					free(SL->last);
-					SL->last = pre;
-					SL->last->next = NULL;
+					if (SL->first->next == SL->last)					//只剩下一个头结点了
+					{
+							  free(SL->last);
+							  SL->last = SL->first;
+							  SL->last->next = SL->first->next = NULL;
+					}
+					else
+					{
+							  free(SL->last);
+							  SL->last = pre;
+							  SL->last->next = NULL;
+					}
 					SL->amount--;
 		  }
 }
@@ -249,9 +258,38 @@ BOOL DListDeleteByNum(DList* SL, ElemType key, ElemType* e)			//双链表的通过数值
 		  }
 }
 
-void  DListSort(DList* SL, LinkNode* left, LinkNode* right)			//排序
+void Swap(ElemType* a1, ElemType* a2)
 {
+		  ElemType temp = *a1;
+		  *a1 = *a2;
+		   *a2 = temp;
+}
 
+void  DListSort(LinkNode* left, LinkNode* right)			//排序
+{
+		  if (left!=NULL && right!=NULL)
+		  {
+					LinkNode* i = left;				//跳过头结点
+					LinkNode* j = right;
+					if(left != NULL && right != NULL)
+					{
+							  while (left->data > i->data && i!=NULL)
+							  {
+										i = i->next;
+							  }
+							  while (left->data < j->data && j!=left)
+							  {
+										j = j->prior;
+							  }
+							  if (i != j)
+							  {
+										Swap(&i->data, &j->data);
+							  }
+					}
+					Swap(&left->data, &j->data);
+					DListSort(left, j);
+					DListSort(j->next, right);
+		  }
 }
 
 void DListDistroy(DList* SL)					  //链表的摧毁

@@ -86,11 +86,11 @@ void Menu(DList* list)
                                         }
                                         break;
                               }
-                              case 11: //SListSort(list->first->next, list->last); break;             //快速排序(也可以选择堆排序)
+                              case 11: DListSort(list->first->next, list->last); break;             //快速排序(也可以选择堆排序)
                               case 12: //SListReverse(list); break;            //逆转
                               case 13: //SListClear(list); break;
                               case 14://SListDistroy(list); printf("\n链表已经被摧毁，即将退出\n"); return; break;
-                              case 15:system("cls"); break;
+                              case 15:system("cls"); break ;
                               default:printf("输入错误请重新输入\n"); break;
                               }
                     }
