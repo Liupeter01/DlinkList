@@ -265,30 +265,24 @@ void Swap(ElemType* a1, ElemType* a2)
 		   *a2 = temp;
 }
 
-void  DListSort(LinkNode* left, LinkNode* right)			//排序
+void  DListSort(DList *list,LinkNode* left, LinkNode* right)			//排序
 {
-		  if (left!=NULL && right!=NULL)
+		  if (left != NULL && right != NULL)
 		  {
-					LinkNode* i = left;				//跳过头结点
-					LinkNode* j = right;
-					if(left != NULL && right != NULL)
+					LinkNode* pslow = left;		  //等价于数组中的指针i
+					LinkNode* pfast = left->next; //等价于数组中的指针j
+					while (pfast != NULL)
 					{
-							  while (left->data > i->data && i!=NULL)
+							  if (pfast->data < left->data)
 							  {
-										i = i->next;
+										pslow = pslow->next;
+										Swap(&pslow->data, &pfast->data);
 							  }
-							  while (left->data < j->data && j!=left)
-							  {
-										j = j->prior;
-							  }
-							  if (i != j)
-							  {
-										Swap(&i->data, &j->data);
-							  }
+							  pfast = pfast->next;
 					}
-					Swap(&left->data, &j->data);
-					DListSort(left, j);
-					DListSort(j->next, right);
+					Swap(&left->data, &pslow->data);
+					DListSort(list,left, pslow->prior);
+					DListSort(list,pslow->next, right);
 		  }
 }
 
@@ -304,5 +298,27 @@ void DListClear(DList* SL)			//链表的清空
 
 void DListReverse(DList* SL)		//链表的反转
 {
-
+		  if (SL == NULL)
+		  {
+					printf("双链表没有被创建，操作失败\n");
+					return;
+		  }
+		  if (SL->amount == 0 || SL->amount == 1)
+		  {
+					return;
+		  }
+		  LinkNode* p = SL->first->next;		  //首元节点
+		  SL->last = p;					//此时的首元节点为尾结点
+		  LinkNode* pnext = p->next;
+		  while (pnext != NULL)			  //pnext
+		  {			
+					LinkNode* pcur = p;
+					LinkNode* next = pnext;
+					p = pnext;
+					pnext = pnext->next;
+					pcur->prior = next;			  //改变节点顺序
+					next->next = pcur;			  //改变结点顺序
+		  }
+		  SL->first->next = p;
+		  SL->last->next = NULL;
 }
