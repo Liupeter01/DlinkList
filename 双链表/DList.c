@@ -290,12 +290,38 @@ void  DListSort(DList *list,LinkNode* left, LinkNode* right)			//排序
 
 void DListDistroy(DList* SL)					  //链表的摧毁
 {
-
+		  if (SL == NULL)
+		  {
+					printf("双链表没有被创建，操作失败\n");
+					return;
+		  }
+		  LinkNode* p = SL->first;		  //头节点
+		  while (p != NULL)
+		  {
+					LinkNode* ptemp = p;
+					p = p->next;
+					free(ptemp);
+		  }
+		  SL->amount = 0;
 }
 
 void DListClear(DList* SL)			//链表的清空
 {
-
+		  if (SL == NULL)
+		  {
+					printf("双链表没有被创建，操作失败\n");
+					return;
+		  }
+		  LinkNode* p = SL->first->next;		  //首元节点
+		  while (p != NULL)
+		  {
+					LinkNode* ptemp = p;
+					p = p->next;
+					free(ptemp);
+		  }
+		  SL->last = SL->first;
+		  SL->first->next = SL->last->next = NULL;
+		  SL->amount = 0;
 }
 
 void DListReverse(DList* SL)		//链表的反转

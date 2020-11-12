@@ -20,7 +20,7 @@ void Menu(DList* list)
                     scanf("%d", &select);
                     if (!select)         //选择值为0 
                     {
-                             // SListDistroy(list);      //z 防止内存泄漏仍然清空内存
+                             DListDistroy(list);      //z 防止内存泄漏仍然清空内存
                               break;              //退出并结束
                     }
                     else
@@ -88,8 +88,8 @@ void Menu(DList* list)
                               }
                               case 11: DListSort(list,list->first->next, list->last); break;             //快速排序(也可以选择堆排序)
                               case 12: DListReverse(list); break;            //逆转
-                              case 13: //SListClear(list); break;
-                              case 14://SListDistroy(list); printf("\n链表已经被摧毁，即将退出\n"); return; break;
+                              case 13: DListClear(list); break;
+                              case 14:DListDistroy(list); printf("\n链表已经被摧毁，即将退出\n"); return; break;
                               case 15:system("cls"); break ;
                               default:printf("输入错误请重新输入\n"); break;
                               }
