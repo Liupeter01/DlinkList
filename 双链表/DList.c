@@ -271,17 +271,19 @@ void  DListSort(DList *list,LinkNode* left, LinkNode* right)			//排序
 		  {
 					LinkNode* pslow = left;		  //等价于数组中的指针i
 					LinkNode* pfast = left->next; //等价于数组中的指针j
+					LinkNode* pre = NULL;
 					while (pfast != NULL)
 					{
 							  if (pfast->data < left->data)
 							  {
+										pre = pslow;
 										pslow = pslow->next;
 										Swap(&pslow->data, &pfast->data);
 							  }
 							  pfast = pfast->next;
 					}
 					Swap(&left->data, &pslow->data);
-					DListSort(list,left, pslow->prior);
+					DListSort(list,left, pre);
 					DListSort(list,pslow->next, right);
 		  }
 }
